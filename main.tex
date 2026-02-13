@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt]{ctexart}
 
 \usepackage{graphicx} % for graphics
 \usepackage{fancyhdr} % for custom headers and footers
@@ -8,7 +8,8 @@
 
 \usepackage[a4paper,left=42mm,right=42mm,top=3cm,bottom=2cm]{geometry}
 \usepackage[absolute,overlay]{textpos} % for absolute positioning
-\usepackage{newtxtext,newtxmath} % Times New Roman font
+% \usepackage{newtxtext,newtxmath} % Times New Roman font
+\usepackage{ifthen}
 \usepackage{anyfontsize} % allows for arbitrary font sizes
 \usepackage{tikz} % for drawing lines
 \usepackage[letterspace=25]{microtype} % for letter spacing
@@ -23,20 +24,31 @@
 \newcommand{\seqNum}[1]{\def\theSeqNum{#1}}
 \newcommand{\meetingNum}[1]{\def\theMettingNum{#1}}
 
-\newcommand{\pream}[2]{\textit{#1} #2,}
-% \newcommand{\operative}[2]{\item \textit{#1} #2;}
+\newcommand{\pream}[2]{\textkaishubold{#1}#2，}
+% \newcommand{\operative}[2]{\item \textkaishubold{#1} #2;}
 
 \NewDocumentCommand{\operative}{s m m}{
   \IfBooleanTF{#1}
-    {\item \textit{#2} #3.}
-    {\item \textit{#2} #3;}
+    {\item \textkaishubold{#2}#3。}
+    {\item \textkaishubold{#2}#3；}
 }
 
-\newcommand*{\ExtractFirstChar}[1]{%
-    \StrRemoveBraces{#1}[\FirstChar]%
-    \StrChar{\FirstChar}{1}[\FirstChar]%
-    \FirstChar
-}
+% \newcommand*{\ExtractFirstChar}[1]{%
+%     \StrRemoveBraces{#1}[\FirstChar]%
+%     \StrChar{\FirstChar}{1}[\FirstChar]%
+%     \FirstChar
+% }
+
+% 新增内容
+
+\setmainfont{Times New Roman}   % 需系统安装该字体
+\newcommand{\organization}[1]{\def\theOrganization{#1}}
+\newcommand{\committeeshort}[1]{\def\theCommitteeShort{#1}}
+
+\newcommand{\textkaishubold}[1]{{\kaishu\addCJKfontfeature{FakeBold=2.5}#1}}
+\newcommand{\textheiti}[1]{{\heiti#1}}
+
+% 结束新增内容
 
 \newenvironment{subpoints}
   {\begin{enumerate}[label=(i),wide=0pt, labelindent=0.8cm, labelsep=0.8cm, leftmargin=56pt, align=left]}
@@ -63,7 +75,7 @@
     {
     	\begin{textblock*}{5cm}(145mm,285mm)
     		\fontsize{9}{0}\selectfont
-      		\textbf{\thepage{}/\pageref{LastPage}}
+      		\textheiti{\thepage{}/\pageref{LastPage}}
      	\end{textblock*}
      	
     }{
@@ -83,7 +95,7 @@
     }{
      	\begin{textblock*}{5cm}(-25mm,285mm)
      		\fontsize{9}{0}\selectfont
-      		\textbf{\thepage{}/\pageref{LastPage}}
+      		\textheiti{\thepage{}/\pageref{LastPage}}
      	\end{textblock*}
     }
 }
@@ -97,7 +109,7 @@
 	
 	\begin{textblock*}{5cm}(24mm,16mm)
 		\fontsize{9}{0}\selectfont % 14pt font size with 17pt leading (line spacing)
-		\textbf{\ExtractFirstChar{\theCommittee}/RES/\theResNum\text{ }(\theResYear)}
+		\textheiti{\theCommitteeShort/RES/\theResNum\ (\theResYear)}
 	\end{textblock*}
 
 }
@@ -123,14 +135,14 @@
 	\end{tikzpicture}
 	
 	
-	\begin{textblock*}{5cm}(128mm,282mm)
+	\begin{textblock*}{5cm}(132.5mm,281.25mm)
 		\fontsize{9}{0}\selectfont % 14pt font size with 17pt leading (line spacing)
-		\textbf{Please recycle}
+		{\ziju{0.25}\textheiti{请回收}}
 	\end{textblock*}
 	
 	\begin{textblock*}{5cm}(10mm,280mm)
 		\fontsize{10}{0}\selectfont % 14pt font size with 17pt leading (line spacing)
-		\theSeqNum\text{ }(E)
+		\theSeqNum\ (E)
 	\end{textblock*}
   }
 }
@@ -143,28 +155,29 @@
 
 \begin{flushleft}
 	
-	\begin{textblock*}{5cm}(4.2cm,1.5cm)
+	\begin{textblock*}{5cm}(4.5cm,1.3cm)
 		\fontsize{14}{17}\selectfont % 14pt font size with 17pt leading (line spacing)
-		United Nations
+		{\ziju{0.1}
+		\theOrganization}
 	\end{textblock*}
 	
-	\begin{textblock*}{5cm}(158mm,1.4cm)
+	\begin{textblock*}{5cm}(160mm,1.4cm)
 		\fontsize{19}{0}\selectfont % 14pt font size with 17pt leading (line spacing)
-		\ExtractFirstChar{\theCommittee}\fontsize{11}{0}\selectfont/RES/\theResNum\text{ }(\theResYear)
+		\theCommitteeShort\fontsize{11}{0}\selectfont/RES/\theResNum\ (\theResYear)
 	\end{textblock*}
 
   	\begin{tikzpicture}[overlay, remember picture, shift={(-19mm, 13mm)}]
     	\draw [line width=0.02cm] (0,0) -- (17,0);
 	\end{tikzpicture}
 	
-	\begin{textblock*}{7cm}(4.2cm,2.4cm)
+	\begin{textblock*}{7cm}(4.5cm,2.4cm)
 		\fontsize{20}{17}\selectfont % 14pt font size with 17pt leading (line spacing)
-		\textbf{\theCommittee}
+		\textheiti{\theCommittee}
 	\end{textblock*}
 
   	\begin{tikzpicture}[remember picture, overlay]
-		\node at ([xshift=3.1cm,yshift=-3.2cm]current page.north west) % 2cm to the right and 3cm down from the top left corner of the page
-    	{\includegraphics[scale=0.065]{images/un_logo.png}}; % scale the image to 50% of its original size
+		\node at ([xshift=3.3cm,yshift=-3.2cm]current page.north west) % 2cm to the right and 3cm down from the top left corner of the page
+    	{\includegraphics[scale=0.12]{images/un_logo.png}}; % scale the image to 50% of its original size
 	\end{tikzpicture}
 	
 	\begin{textblock*}{5cm}(132mm,2.7cm)
@@ -179,20 +192,20 @@
 	
 	\vspace{55pt}
 	
-	\Large\textbf{Resolution \theResNum\text{ }(\theResYear)} % add title here
+	\Large\textheiti{第\theResNum(\theResYear)号决议} % add title here
   	\vspace{5pt} % space between the title and the next line
 
-	\large\textbf{Adopted by the \theCommittee\ at its \theMettingNum th meeting, on \theResDate}
+	\large\textheiti{\theResDate \theCommittee 第 \theMettingNum 次会议通过}
 	
 	\enlargethispage{-2cm}
 		
 \end{flushleft}
 
-\textit{The \theCommittee,}
+\textkaishubold{\theCommittee，}
 
 \input{resolution/preams.tex} 
 
-\begin{enumerate}[wide=0pt, labelindent=0.8cm, labelsep=0.8cm, leftmargin=0pt, align=left]
+\begin{enumerate}[wide=0pt, labelindent=0.8cm, labelsep=0.3cm, leftmargin=0pt, align=left]
 	\input{resolution/operatives.tex}
 \end{enumerate}
 

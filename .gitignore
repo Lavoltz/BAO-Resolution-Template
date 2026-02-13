@@ -36,6 +36,7 @@
 *.fls
 *.synctex.gz
 *.synctex(busy)
+*.xdv
 
 # Directories commonly used for output
 _output
