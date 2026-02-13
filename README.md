@@ -1,44 +1,45 @@
-# MUN-Resolution-Template
+# BAO 决议模板
 
-## Description
+这是一个用于模拟《明日方舟：终末地》中环带公约组织的决议模板。该模板使用LaTeX编写，可以生成格式规范的决议文件。
 
-This repository contains a LaTeX template for easily creating Model United Nations (MUN) resolutions, without having to fight with the formatting in Word. The template is designed to provide a professional and standardized format for MUN resolutions, copied from original UN resolutions. It provides custom commands for setting resolution numbers, dates, committees, and other resolution-specific details.
+## 特性
 
-## Files
+- 符合标准MUN决议格式
+- 支持中英双语
+- 自动页眉页脚生成
+- 可自定义委员会信息
+- 包含二维码和回收标志
 
-The repository includes the following files:
-- `main.tex`: The main LaTeX file that includes the preamble and document structure. 
-- `resolution/headers.tex`: A file that contains the overall information used in the document. 
-- `resolution/preams.tex`: A file that contains the preambular clauses of the resolution. 
-- `resolution/operatives.tex`: A file that contains the operative clauses of the resolution.
-- `images/`: A directory that contains any images used in the document.
+## 文件结构
 
-## Usage
+- `main.tex`: 主文档文件
+- `resolution/`: 决议内容目录
+  - `headers.tex`: 决议头部信息
+  - `preams.tex`: 前言部分
+  - `operatives.tex`: 行动条款部分
 
-1. Clone the repository to your local machine.
-2. Open `main.tex` in your preferred LaTeX editor.
-3. Replace the placeholders in the `\resNum`, `\resDate`, `\resYear`, `\committee`, `\seqNum`, and `\meetingNum` in `resolution/headers.tex` commands with your resolution details.
-4. Write your preambular clauses in `resolution/preams.tex` and your operative clauses in `resolution/operatives.tex`.
-5. If you want to write a special operative wihtout the `;` at the end use `\operative*` and add any punctuation needed.
-6. To do sub points in operatives use `\operative*` and in it use `\begin{subpoints} \item ... \end{subpoints}`.
-7. Compile the LaTeX document to produce a PDF of your resolution.
+## 使用方法
 
-## Requirements
+1. 修改 `resolution/headers.tex` 中的委员会信息
+2. 在 `resolution/preams.tex` 中添加前言条款
+3. 在 `resolution/operatives.tex` 中添加行动条款
+4. 编译 `main.tex` 生成PDF文件
 
-To compile this LaTeX template, you will need a LaTeX distribution installed on your machine. This template was tested with the TeX Live distribution.
+## 编译要求
 
-## Contributing
+- XeLaTeX
+- ctex 宏包
+- 其他相关宏包（详见 `main.tex`）
 
-Contributions to improve this template are welcome. Feel free to submit a pull request or open an issue if you have any suggestions or find any problems.
+## 注意事项
 
-## Citation
+- 图片文件需放置在正确目录
+- 编译时可能需要多次运行以确保交叉引用正确
+- 如果您想编写一个不带分号的特殊执行条款，请使用 `\operative*` 并添加所需的标点符号。
+- 要在执行条款中添加子条款，请使用 `\operative*`，并在其中使用 `\begin{subpoints} \item ... \end{subpoints}`。
 
-The template provided in this project is based on the text of United Nations Security Council Resolution 2671, adopted on December 22, 2022. The creation process involved directly copying and adapting the original document's structure and format. The original document can be accessed from the [UN's Official Document System](https://documents-dds-ny.un.org/doc/UNDOC/GEN/N22/767/81/PDF/N2276781.pdf?OpenElement) or other official UN documentation resources.
+## 许可证
 
-
-## Disclaimer
-
-This LaTeX template project and its developers are not officially associated or affiliated with the United Nations in any way. The use of the text from the UN Security Council Resolution in this project is purely for demonstrative and educational purposes. 
-
-This project is meant to assist users in creating documents similar in format to UN Resolutions. It does not claim to provide official UN documents or formats. Users should ensure the documents they create with this template meet the necessary requirements for their specific uses.
-
+本项目使用的模板和包含的媒体内容**没有**明确的许可证。  
+`images`目录下的`un_logo.bak.png`从维基共享下载，处于公有领域。  
+本项目与联合国、鹰角网络无关。
